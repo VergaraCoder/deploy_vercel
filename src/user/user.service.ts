@@ -1,26 +1,60 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from './entities/user.entity';
+import { Repository } from 'typeorm';
+import { RoleService } from 'src/role/role.service';
 
 @Injectable()
 export class UserService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+
+  constructor(
+    @InjectRepository(User)
+    private userRepository:Repository<User>,
+    private roleService:RoleService
+  ){}
+
+  async create(createUserDto: CreateUserDto) {
+    try{
+      const role=await this.roleService.findOneByName(createUserDto.roleName);
+
+      delete createUserDto.name;
+
+      const dataUser:User=this.userRepository.create({...createUserDto,roleId:role.id});
+
+      await this.userRepository.save(dataUser);
+
+      return dataUser;
+    }catch(err:any){}
+
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findAll() {
+     try{
+      const allUser=await this.userRepository.find();
+      return allUser;
+    }catch(err:any){}
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number) {
+     try{
+      const oneUser=await this.userRepository.findOne({where:{id:id}});
+      return oneUser;
+    }catch(err:any){}
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto) {
+     try{
+      const {affected}=await this.userRepository.update(id,updateUserDto);
+      return "Perfectly updated";
+    }catch(err:any){}
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number) {
+     try{
+      const {affected}=await this.userRepository.delete(id);
+      return "Perfectly Deleted";
+    }catch(err:any){}
   }
 }
