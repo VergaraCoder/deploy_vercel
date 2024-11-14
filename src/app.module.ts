@@ -8,9 +8,22 @@ import { TournamentPlayerModule } from './tournament-player/tournament-player.mo
 import { GamesModule } from './games/games.module';
 import { ResultModule } from './result/result.module';
 import { ChampionModule } from './champion/champion.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
+import { Credentials } from './common/db/db.config';
 
 @Module({
-  imports: [UserModule, RoleModule, PlayerModule, TournamentModule, TournamentPlayerModule, GamesModule, ResultModule, ChampionModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal:true,
+      envFilePath:".env"
+    })
+    ,
+    TypeOrmModule.forRootAsync({
+      imports:[ConfigModule],
+      useClass:Credentials
+    })
+    ,UserModule, RoleModule, PlayerModule, TournamentModule, TournamentPlayerModule, GamesModule, ResultModule, ChampionModule],
   controllers: [],
   providers: [],
 })
