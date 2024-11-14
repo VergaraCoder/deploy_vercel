@@ -1,73 +1,64 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+COMANDOS PARA DESPLIEGE EN VERCEL .
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+1- PARA INSTALAR LA CLI DE VERCEL Y PODER VISUALIZAR TODO EN VERCEL INSTALAMOS 
+# npm install -g vercel
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+2- PARA VISUALIZAR LOS PROYECTOS QUE TENEMOS ACTIVOS USAMOS 
+# vercel projects ls
 
-## Description
+3- UNA VEZ PODAMOS VER LOS PROYECTOS ACTIVOS SI QUEREMOS PAUSAR O DETENER EL PROYECTO DESPLEGADO HACEMOS 
+# vercel rm NOMBRE_DEL_PROYECTO
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
 
-```bash
-$ npm install
-```
+________________________
 
-## Running the app
+PASOS PARA HACER DESPLIEGE EN VERCEL
 
-```bash
-# development
-$ npm run start
+1-ENTRAR EN LA WEB Y HACER EL CORRESPODIENETE LOGIN
 
-# watch mode
-$ npm run start:dev
+LINK --->  https://vercel.com/login
 
-# production mode
-$ npm run start:prod
-```
+2- ENTRAR EN LA SECCION DE OVERvIEW Y DARLE DONDE DICE :
 
-## Test
+- Add new -- project -- importar el repo deseado y poner las variables de entorno
 
-```bash
-# unit tests
-$ npm run test
+_____________________________
 
-# e2e tests
-$ npm run test:e2e
 
-# test coverage
-$ npm run test:cov
-```
 
-## Support
+CONFIGURACION INTERNA DEL BACK END 
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+1-DEBEMOS CREAR UN ARCHIVO LLAMADO <vercel.json> EN LA RAIZ DEL PROYECTO Y PONER LA SIGUIENTE CONFIGURACION
 
-## Stay in touch
+  {
+    "version": 2,
+    "builds": [
+      { "src": "src/main.ts", "use": "@vercel/node" }
+    ],
+    "routes": [
+      { "src": "/(.*)",
+       "dest": "src/main.ts",
+       "methods":[
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+       ]
+    }
+    ]
+  }
+  
+2- SUBIR TODOS ESTOS CAMBIOS A LA RAMA "master" o "main" PARA QUE LOS CAMBIOS PERSISTAN 
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+_____________________________
 
-## License
 
-Nest is [MIT licensed](LICENSE).
+
+ALTERNATIVAS :
+
+¿ POR ALGUNA RAZON NO DA EL DESPLIEGUE ?
+SOLUCION: inicializa en npm run build 
+
+
+
