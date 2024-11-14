@@ -11,6 +11,7 @@ import { ChampionModule } from './champion/champion.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { Credentials } from './common/db/db.config';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
   imports: [
@@ -23,7 +24,7 @@ import { Credentials } from './common/db/db.config';
       imports:[ConfigModule],
       useClass:Credentials
     })
-    ,UserModule, RoleModule, PlayerModule, TournamentModule, TournamentPlayerModule, GamesModule, ResultModule, ChampionModule],
+    ,UserModule, RoleModule, PlayerModule, TournamentModule, TournamentPlayerModule, GamesModule, ResultModule, ChampionModule, NotificationsModule],
   controllers: [],
   providers: [],
 })
