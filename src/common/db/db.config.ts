@@ -6,6 +6,7 @@ import { Game } from "src/games/entities/game.entity";
 import { Player } from "src/player/entities/player.entity";
 import { Result } from "src/result/entities/result.entity";
 import { Role } from "src/role/entities/role.entity";
+import { Room } from "src/rooms/entities/room.entity";
 import { TournamentPlayer } from "src/tournament-player/entities/tournament-player.entity";
 import { Tournament } from "src/tournament/entities/tournament.entity";
 import { User } from "src/user/entities/user.entity";
@@ -28,7 +29,7 @@ export class Credentials implements TypeOrmOptionsFactory{
             password: this.configService.get<string>('DB_PASSWORD'),
             database: this.configService.get<string>('DB_DATABASE'),
             entities: [
-              User,Player,Tournament,TournamentPlayer,Role,Game,Result,Champion
+              User,Player,Tournament,TournamentPlayer,Role,Game,Result,Champion,Room
             ],
             synchronize: true,
         });
