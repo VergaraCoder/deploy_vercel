@@ -35,6 +35,14 @@ export class RoomsService {
     }catch(err:any){}
   }
 
+  async findOneRoomById(id: number) {
+    try{
+      const oneRoom=await this.roomRepository.findOneBy({id});
+      return oneRoom;
+    }catch(err:any){}
+  }
+
+
   async update(id: number, updateRoomDto: UpdateRoomDto) {
     try{
       const {affected}=await this.roomRepository.update(id,updateRoomDto);

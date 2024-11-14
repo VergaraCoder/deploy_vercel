@@ -4,6 +4,7 @@ import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from "@nestjs/typeorm";
 import { Champion } from "src/champion/entities/champion.entity";
 import { Game } from "src/games/entities/game.entity";
 import { Player } from "src/player/entities/player.entity";
+import { Reservation } from "src/reservations/entities/reservation.entity";
 import { Result } from "src/result/entities/result.entity";
 import { Role } from "src/role/entities/role.entity";
 import { Room } from "src/rooms/entities/room.entity";
@@ -29,7 +30,7 @@ export class Credentials implements TypeOrmOptionsFactory{
             password: this.configService.get<string>('DB_PASSWORD'),
             database: this.configService.get<string>('DB_DATABASE'),
             entities: [
-              User,Player,Tournament,TournamentPlayer,Role,Game,Result,Champion,Room
+              User,Player,Tournament,TournamentPlayer,Role,Game,Result,Champion,Room,Reservation
             ],
             synchronize: true,
         });

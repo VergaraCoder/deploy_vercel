@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { RoleService } from 'src/role/role.service';
+import { Role } from 'src/role/entities/role.entity';
 
 @Injectable()
 export class UserService {
@@ -17,10 +18,11 @@ export class UserService {
 
   async create(createUserDto: CreateUserDto) {
     try{
-      const role=await this.roleService.findOneByName(createUserDto.roleName);
+      const role:Role=await this.roleService.findOneByName(createUserDto.roleName);
 
-      delete createUserDto.name;
-
+      delete createUserDto.roleName;
+      console.log(createUserDto);
+      
       const dataUser:User=this.userRepository.create({...createUserDto,roleId:role.id});
 
       await this.userRepository.save(dataUser);

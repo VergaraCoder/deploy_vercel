@@ -13,6 +13,7 @@ import { ConfigModule } from '@nestjs/config';
 import { Credentials } from './common/db/db.config';
 import { RoomsModule } from './rooms/rooms.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { ReservationsModule } from './reservations/reservations.module';
 
 @Module({
   imports: [
@@ -25,7 +26,7 @@ import { NotificationsModule } from './notifications/notifications.module';
       imports:[ConfigModule],
       useClass:Credentials
     })
-    ,UserModule, RoleModule, PlayerModule, TournamentModule, TournamentPlayerModule, GamesModule, ResultModule, ChampionModule, RoomsModule,NotificationsModule],
+    ,UserModule, RoleModule, PlayerModule, TournamentModule, TournamentPlayerModule, GamesModule, ResultModule, ChampionModule, RoomsModule,NotificationsModule, ReservationsModule],
   controllers: [],
   providers: [],
 })

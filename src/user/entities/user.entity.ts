@@ -1,5 +1,6 @@
+import { Reservation } from "src/reservations/entities/reservation.entity";
 import { Role } from "src/role/entities/role.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("users")
 export class User {
@@ -21,4 +22,6 @@ export class User {
     @ManyToOne(()=>Role,role=>role.user)
     role:Role;
 
+    @OneToMany(()=>Reservation,reservation=>reservation.user)
+    reservation:Reservation[];
 }
