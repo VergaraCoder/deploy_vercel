@@ -16,4 +16,7 @@ export class Room {
 
     @Column()
     available:boolean;
+
+    @Column()
+    location:string;
 }
