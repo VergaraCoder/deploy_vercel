@@ -18,6 +18,9 @@ export class Game {
     tournamentId:number;
 
     @Column()
+    round:number;
+
+    @Column()
     date:Date;
 
     @ManyToOne(()=>Tournament,tournament=>tournament.game)

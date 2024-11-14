@@ -1,26 +1,51 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTournamentDto } from './dto/create-tournament.dto';
 import { UpdateTournamentDto } from './dto/update-tournament.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Tournament } from './entities/tournament.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TournamentService {
-  create(createTournamentDto: CreateTournamentDto) {
-    return 'This action adds a new tournament';
+
+  constructor(
+    @InjectRepository(Tournament)
+    private tournamentRepository:Repository<Tournament>
+  ){}
+
+  async create(createTournamentDto: CreateTournamentDto) {
+    try{
+      const dataTournament= this.tournamentRepository.create(createTournamentDto);
+      await this.tournamentRepository.save(dataTournament);
+      return dataTournament;
+    }catch(err:any){}
   }
 
-  findAll() {
-    return `This action returns all tournament`;
+  async findAll() {
+    try{
+      const find= await this.tournamentRepository.find();
+      return find;
+    }catch(err:any){}
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} tournament`;
+  async findOne(id: number) {
+    try{
+      const findOne= await this.tournamentRepository.findOneBy({id});
+      return findOne;
+    }catch(err:any){}
   }
 
-  update(id: number, updateTournamentDto: UpdateTournamentDto) {
-    return `This action updates a #${id} tournament`;
+  async update(id: number, updateTournamentDto: UpdateTournamentDto) {
+    try{
+      const {affected}= await this.tournamentRepository.update(id,updateTournamentDto);
+      return "Perfectly updated";
+    }catch(err:any){}
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} tournament`;
+  async remove(id: number) {
+    try{
+      const {affected}= await this.tournamentRepository.delete(id);
+      return "Perfectly deleted";
+    }catch(err:any){}
   }
 }
