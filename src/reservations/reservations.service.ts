@@ -98,8 +98,8 @@ export class ReservationsService {
           message:"fALLO LA ELIMINACION DE LA RESERVA"
         });
       }
-      this.notificationsGateway.remove(dataRoom);
       await this.roomService.update(dataRoom.id, {available:true});
+      this.notificationsGateway.remove({...dataRoom,available:true});
       return "Perfectly deleted";
     }catch(err:any){
       throw ManageError.signedError(err.message);

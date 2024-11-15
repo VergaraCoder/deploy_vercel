@@ -13,6 +13,6 @@ export class NotificationsGateway {
 
   @SubscribeMessage('removeNotification')
   remove(@MessageBody() data: any) {
-    this.server.emit("disponibility",data);
+    this.server.emit("disponibility",{habitacionAvailable:data.id,...data});
   }
 }
