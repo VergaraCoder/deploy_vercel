@@ -17,9 +17,12 @@ export class Reservation {
     @Column()
     minutesReserved:number;
 
-    @ManyToOne(()=>User,user=>user.reservation)
+    @Column()
+    dateReservation:string
+
+    @ManyToOne(()=>User,user=>user.reservation,{eager:true})
     user:User;
 
-    @ManyToOne(()=>Room,room=>room.reservation)
+    @ManyToOne(()=>Room,room=>room.reservation,{eager:true})
     room:Room;
 }

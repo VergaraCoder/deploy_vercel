@@ -18,6 +18,9 @@ export class Room {
     @Column()
     location:string;
 
+    @Column()
+    available:boolean;
+
     @OneToMany(()=>Reservation,reservation=>reservation.room)
     reservation:Reservation[];
 }

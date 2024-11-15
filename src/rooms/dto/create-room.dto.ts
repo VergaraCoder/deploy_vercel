@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsBoolean, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateRoomDto {
     @ApiProperty({example:"Hermosa habitacion con 2 vamos super comoda con aire acondicionado"})
@@ -20,6 +20,6 @@ export class CreateRoomDto {
 
     @ApiProperty({example:true})
     @IsNotEmpty()
-    @IsString()
+    @IsBoolean()
     available:boolean;
 }
